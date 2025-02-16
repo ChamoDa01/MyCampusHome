@@ -30,7 +30,7 @@ import PayRent from './pages/PayRent';
 import NewChat from './pages/newChat';
 
 
-axios.defaults.baseURL = import.meta.env.VITE_BASE_URL || 'http://localhost:4000/api';
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL || 'https://mycampushome-production.up.railway.app/api/';
 
 
 export default function App() {
@@ -55,7 +55,6 @@ export default function App() {
         <Route path="/verify-otp" element={<VerifyOTP />} />
         <Route path="/reset-password-otp" element={<ResetPasswordOTP />} />
 
-        {/* 404 Route */}
         <Route path="/*" element={<NotFound />} />
 
         {/* Private Routes */}

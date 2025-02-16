@@ -51,7 +51,7 @@ const AboutContactPage = () => {
           <p className="max-w-2xl mx-auto text-lg text-gray-600">We're here for you 24/7. Reach out anytime!</p>
           <div className="flex justify-center gap-8 mt-8">
             <div className="flex items-center gap-2 text-lg"><Mail /> Email Us</div>
-            <div className="flex items-center gap-2 text-lg"><Phone /> +94 112 641 059</div>
+            <div className="flex items-center gap-2 text-lg"><Phone /> +94 704424913</div>
           </div>
           <p className="mt-6 text-gray-600">201, Bandaranayake Mawatha, Moratuwa, 10400</p>
         </section>

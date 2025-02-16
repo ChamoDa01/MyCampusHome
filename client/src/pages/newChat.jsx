@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import Navbar from "../components/Navbar";
 
-const socket = io("http://localhost:4000", {
+const socket = io(import.meta.env.VITE_BASE_URL, {
   transports: ["websocket", "polling"],
   withCredentials: true,
 });
@@ -44,8 +44,8 @@ const Chat = () => {
       try {
         setLoading(true);
         const url = searchQuery
-          ? `/api/conversations/search/${userId}?searchQuery=${searchQuery}`
-          : `/api/conversations/${userId}`;
+          ? `${import.meta.env.VITE_BASE_URL}/conversations/search/${userId}?searchQuery=${searchQuery}`
+          : `${import.meta.env.VITE_BASE_URL}/conversations/${userId}`;
 
         const res = await fetch(url);
         if (!res.ok) throw new Error("Failed to load conversations");
@@ -66,7 +66,7 @@ const Chat = () => {
 
     const fetchMessages = async () => {
       try {
-        const response = await fetch(`/api/messages/${conversationId}`);
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/messages/${conversationId}`);
         if (!response.ok) throw new Error("Failed to fetch messages");
         setMessages(await response.json());
       } catch (error) {
@@ -100,7 +100,7 @@ const Chat = () => {
     if (!newMessage.trim() || !receiver) return;
     const messageData = { sender: userId, receiver: receiver._id, message: newMessage };
     try {
-      const response = await fetch("/api/messages/send", {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/messages/send`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(messageData),
@@ -112,7 +112,7 @@ const Chat = () => {
       setNewMessage("");
 
       if (!conversationId) {
-        const updatedConversations = await fetch(`/api/conversations/${userId}`);
+        const updatedConversations = await fetch(`${import.meta.env.VITE_BASE_URL}/conversations/${userId}`);
         if (!updatedConversations.ok) throw new Error("Failed to fetch conversations");
         const conversationsData = await updatedConversations.json();
 
@@ -133,7 +133,7 @@ const Chat = () => {
 
   const deleteMessage = async (messageId) => {
     try {
-      const response = await fetch(`/api/messages/${messageId}`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/messages/${messageId}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId }),
@@ -178,7 +178,7 @@ const Chat = () => {
 
   const deleteConversation = async (convId, userID) => {
     try {
-      const response = await fetch(`/api/conversations/${convId}`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/conversations/${convId}`, {
         method: "DELETE",
       });
 
